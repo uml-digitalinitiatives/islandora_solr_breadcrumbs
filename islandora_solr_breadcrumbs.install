@@ -1,0 +1,12 @@
+<?php
+/**
+ * @file
+ * Install/Uninstall hooks
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function islandora_solr_breadcrumbs_uninstall() {
+  cache_clear_all(ISLANDORA_SOLR_BREADCRUMB_CACHE_NAME, 'cache_menu', TRUE);
+}

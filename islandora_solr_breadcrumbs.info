@@ -1,0 +1,6 @@
+name = Islandora Solr Breadcrumbs
+package = Islandora
+description = Adds a default Solr breadcrumbs generator, assumes a Collection can ONLY be inside another Collection.
+core = 7.x
+version = 7.x-dev
+dependencies[] = islandora_solr

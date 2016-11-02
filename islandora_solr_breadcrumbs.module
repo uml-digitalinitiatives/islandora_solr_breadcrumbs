@@ -1,0 +1,72 @@
+<?php
+
+/**
+ * @file
+ * This file contains functions to create breadcrumbs using Solr.
+ */
+
+const ISLANDORA_SOLR_BREADCRUMB_BACKEND = 'islandora_solr_breadcrumbs_backend';
+
+const ISLANDORA_SOLR_BREADCRUMB_CACHE_NAME = 'islandora_solr_breadcrumbs_map';
+
+/**
+ * Implements hook_islandora_breadcrumbs_backends().
+ */
+function islandora_solr_islandora_breadcrumbs_backends() {
+  $module_path = drupal_get_path('module', 'islandora_solr_breadcrumbs');
+  return array(
+    ISLANDORA_SOLR_BREADCRUMB_BACKEND => array(
+      'title' => t('Islandora Solr Breadcrumbs'),
+      'callable' => 'islandora_solr_breadcrumbs_islandora_breadcrumbs_backends_callable',
+      'file' => "$module_path/includes/breadcrumbs.inc",
+    ),
+  );
+}
+
+/**
+ * Clear Collection Map entries.
+ *
+ * Due to storing maps of Collection hierarchies, we need to clear the cache
+ * when a collection is added/removed or updated. But only if we are using
+ * Islandora Solr to generate breadcrumbs.
+ */
+function islandora_solr_breadcrumbs_cache_check() {
+  if (variable_get('islandora_breadcrumbs_backends', ISLANDORA_BREADCRUMB_LEGACY_BACKEND) == ISLANDORA_SOLR_BREADCRUMB_BACKEND) {
+    cache_clear_all(ISLANDORA_SOLR_BREADCRUMB_CACHE_NAME, 'cache_menu', TRUE);
+  }
+}
+
+/**
+ * Implements hook_cmodel_islandora_object_ingested().
+ */
+function islandora_solr_breadcrumbs_islandora_collectioncmodel_islandora_object_ingested() {
+  islandora_solr_breadcrumbs_cache_check();
+}
+
+/**
+ * Implements hook_cmodel_islandora_object_purged().
+ */
+function islandora_solr_breadcrumbs_islandora_collectioncmodel_islandora_object_purged() {
+  islandora_solr_breadcrumbs_cache_check();
+}
+
+/**
+ * Implements hook_cmodel_islandora_datastream_ingested().
+ */
+function islandora_solr_breadcrumbs_islandora_collectioncmodel_islandora_datastream_ingested() {
+  islandora_solr_breadcrumbs_cache_check();
+}
+
+/**
+ * Implements hook_cmodel_islandora_datastream_modified().
+ */
+function islandora_solr_breadcrumbs_islandora_collectioncmodel_islandora_datastream_modified() {
+  islandora_solr_breadcrumbs_cache_check();
+}
+
+/**
+ * Implements hook_cmodel_islandora_datastream_purged().
+ */
+function islandora_solr_breadcrumbs_islandora_collectioncmodel_islandora_datastream_purged() {
+  islandora_solr_breadcrumbs_cache_check();
+}
