@@ -61,7 +61,7 @@ function islandora_solr_breadcrumbs_load_crumbs() {
   }
 
   if (isset($fetch)) {
-    module_load_include('inc', 'islandora_solr_search', 'includes/query_processor');
+    module_load_include('inc', 'islandora_solr', 'includes/query_processor');
     $solr_build = new IslandoraSolrQueryProcessor();
 
     $content_model = variable_get('islandora_solr_content_model_field', 'RELS_EXT_hasModel_uri_ms');
