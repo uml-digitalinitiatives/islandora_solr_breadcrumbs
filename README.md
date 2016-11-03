@@ -33,7 +33,7 @@ This module requires the following modules/libraries:
  
 To enable breadcrumbs, browse to Administration » Islandora » Configuration and choose **Islandora Solr Breadcrumbs** under **Breadcrumb generation**.
 
-![Breadcrumbs](https://cloud.githubusercontent.com/assets/2857697/19577960/1c70a1c8-96df-11e6-8a7b-92fa16c30137.jpg)
+![Breadcrumbs](https://cloud.githubusercontent.com/assets/2857697/19951919/514d3140-a12f-11e6-98d1-9393834180c4.jpg)
 
 ## Troubleshooting/Issues
  
