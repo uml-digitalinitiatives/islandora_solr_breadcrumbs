@@ -164,7 +164,7 @@ function islandora_solr_breadcrumbs_get_breadcrumbs_recursive($pid, array &$cont
     $object = islandora_object_load($pid);
     if ($object && !in_array('islandora:collectionCModel', $object->models)) {
       // Recurse with parents up to.
-      $parents = islandora_solr_get_parents_from_rels_ext($object);
+      $parents = islandora_solr_breadcrumbs_get_parents_from_rels_ext($object);
 
       if (count($parents) > 0 && $context['level'] > 0) {
         $parent_object = reset($parents);
