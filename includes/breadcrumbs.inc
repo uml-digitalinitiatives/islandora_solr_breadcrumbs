@@ -38,7 +38,7 @@ function islandora_solr_breadcrumbs_load_crumbs() {
   $breadcrumbs = array();
 
   if (!isset($crumb_cache)) {
-    $cache = cache_get(ISLANDORA_SOLR_BREADCRUMB_CACHE_NAME, 'cache_menu');
+    $cache = cache_get(ISLANDORA_SOLR_BREADCRUMBS_CACHE_NAME, 'cache_menu');
     if (!$cache) {
       // Nothing in cache so initialize it with these roles.
       $fetch = $cache_roles;
@@ -109,7 +109,7 @@ function islandora_solr_breadcrumbs_load_crumbs() {
         }
       }
       $crumb_cache[$cache_roles] = $breadcrumbs;
-      cache_set(ISLANDORA_SOLR_BREADCRUMB_CACHE_NAME, $crumb_cache, 'cache_menu');
+      cache_set(ISLANDORA_SOLR_BREADCRUMBS_CACHE_NAME, $crumb_cache, 'cache_menu');
     }
   }
   return $breadcrumbs;
@@ -219,6 +219,7 @@ function islandora_solr_breadcrumbs_get_breadcrumbs_recursive($pid, array &$cont
  *   (RELS-EXT) relationship with.
  */
 function islandora_solr_breadcrumbs_get_parents_from_rels_ext(AbstractObject $object) {
+  module_load_include('inc', 'islandora', 'includes/utilities');
   $breadcrumb_predicates = islandora_invoke_hook_list(ISLANDORA_BREADCRUMB_FILTER_PREDICATE_HOOK, $object->models, array($object));
   try {
     $parentobjects = $object->relationships->get(FEDORA_RELS_EXT_URI, NULL, NULL, RELS_TYPE_URI);
